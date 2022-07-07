@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+</body>
+<video id="videoElement" autoplay width="1024"  height="576" muted >
+</video>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/flv.js/1.5.0/flv.min.js"></script>
+<script>
+  if (flvjs.isSupported()) {
+    startVideo()
+  }
+  function startVideo(){
+    var videoElement = document.getElementById('videoElement');
+    var flvPlayer = flvjs.createPlayer({
+      type: 'flv',
+      hasVideo: true,
+      enableStashBuffer: true,
+      url: 'http://192.168.3.85/flv?port=1935&app=live1&stream=test'
+    });
+    flvPlayer.attachMediaElement(videoElement);
+    flvPlayer.load();
+    flvPlayer.play();
+  }
+</script>
+
+</html>

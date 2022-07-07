@@ -1,0 +1,7 @@
+#对于rabbitMQ的支持
+spring:
+  rabbitmq:
+    password: 123456
+    username: niu
+    port: 5672
+    host: 192.168.3.85

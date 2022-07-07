@@ -1,5 +1,5 @@
 server:
-  port: 7001
+  port: 8010
   application:
     #项目名
     name: registery
@@ -22,4 +22,4 @@ eureka:
     fetch-registry: false
     # Eureka监控页面~
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://192.168.3.85:8010/eureka/
