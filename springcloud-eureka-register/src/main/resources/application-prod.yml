@@ -1,6 +1,15 @@
 server:
-  port: 7001
-
+  port: 8001
+  application:
+    #项目名
+    name: registery
+#  datasource:
+#    # 德鲁伊数据源
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/adminniu?useUnicode=true&characterEncoding=utf-8
+#    username: root
+#    password: root
 # Eureka配置
 eureka:
   instance:
@@ -13,4 +22,4 @@ eureka:
     fetch-registry: false
     # Eureka监控页面~
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://localhost/eureka/
