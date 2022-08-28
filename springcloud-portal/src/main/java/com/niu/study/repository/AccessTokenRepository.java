@@ -8,9 +8,25 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * 用户令牌
  */
-public interface AccessTokenRepository extends JpaRepository<AccessToken, Long>, JpaSpecificationExecutor<AccessToken> {
+public interface AccessTokenRepository{
+    /**
+     * 根据令牌查询
+     * @param token
+     * @return
+     */
+    AccessToken findByToken(String token);
 
+    /**
+     * 创建令牌
+     * @param accessToken
+     */
+    void saveToken(AccessToken accessToken);
 
+    /**
+     * 更新令牌
+     * @param token
+     */
+    void updateToken(AccessToken token);
 
 
 

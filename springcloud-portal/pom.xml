@@ -11,8 +11,8 @@
     <artifactId>springcloud-portal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>portal</name>
-    <description>portal</description>
+<!--    <name>portal</name>-->
+<!--    <description>portal</description>-->
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -37,6 +37,18 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>8.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

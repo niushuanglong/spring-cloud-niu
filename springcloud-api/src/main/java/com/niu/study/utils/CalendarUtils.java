@@ -278,6 +278,18 @@ public final class CalendarUtils {
         calendar.set(Calendar.MILLISECOND, 499);
         return calendar.getTime();
     }
+
+    /**
+     * 添加一天
+     * @return
+     */
+    public static final Date addOneDay(Date src,int hour){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setMinimalDaysInFirstWeek(7);
+        calendar.setTime(src);
+        calendar.set(Calendar.HOUR_OF_DAY, +hour);
+        return calendar.getTime();
+    }
 	/**
 	 * 修改日期的时间
 	 * @param src

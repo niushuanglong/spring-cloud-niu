@@ -18,7 +18,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.niu.study"))
                 .paths(PathSelectors.any())
-                .build().pathMapping("portal");
+                .build();
     }
 
     /**

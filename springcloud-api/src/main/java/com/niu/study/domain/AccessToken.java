@@ -29,7 +29,7 @@ public class AccessToken {
     @Column(name = "access_token")
     private String accessToken;
     //过期时间
-    @CreationTimestamp
+    //@CreationTimestamp
     @Column(name = "expire_time", updatable = false)
     @ApiModelProperty(value = "创建时间", hidden = true)
     private Date expireTime;
@@ -37,5 +37,9 @@ public class AccessToken {
     public AccessToken(String accessToken, Date expireTime) {
         this.accessToken = accessToken;
         this.expireTime = expireTime;
+    }
+    /*************************************更新领域对象******************************************/
+    public void updateExpireTime(Date expireTime) {
+        this.expireTime=expireTime;
     }
 }

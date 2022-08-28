@@ -22,4 +22,6 @@ eureka:
     fetch-registry: false
     # Eureka监控页面~
     service-url:
-      defaultZone: http://localhost/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false

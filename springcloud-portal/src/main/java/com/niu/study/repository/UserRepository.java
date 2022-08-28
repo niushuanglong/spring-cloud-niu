@@ -11,10 +11,6 @@ public interface UserRepository  {
     //根据用户名查询用户
     User findUsername(String username);
 
-
-
-
-
-
-
+    //创建用户  只传了用户名和密码
+    void createUserByUsernameAndPwd(User user);
 }

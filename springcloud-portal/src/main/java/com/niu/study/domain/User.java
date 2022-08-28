@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -64,21 +65,21 @@ public class User extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "用户部门")
     private Dept dept;
 
-    @NotBlank
+    //@NotBlank
     @Column(unique = true)
     @ApiModelProperty(value = "用户名称")
     private String username;
 
-    @NotBlank
+    //@NotBlank
     @ApiModelProperty(value = "用户昵称")
     private String nickName;
 
     @Email
-    @NotBlank
+    //@NotBlank
     @ApiModelProperty(value = "邮箱")
     private String email;
 
-    @NotBlank
+    //@NotBlank
     @ApiModelProperty(value = "电话号码")
     private String phone;
 
@@ -94,8 +95,10 @@ public class User extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "密码")
     private String password;
 
-    @NotNull
+    //@NotNull
+    @Type(type = "java.lang.Boolean")
     @ApiModelProperty(value = "是否启用")
+
     private Boolean enabled;
 
     @ApiModelProperty(value = "是否为admin账号", hidden = true)

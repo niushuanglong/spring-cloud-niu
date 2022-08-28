@@ -1,4 +1,4 @@
-package com.niu.study.service.impl;
+package com.niu.study.service.HibernateImpl;
 
 import com.niu.study.domain.User;
 import com.niu.study.repository.JpaHibernateRepository;
@@ -18,5 +18,10 @@ public class UserImpl extends JpaHibernateRepository implements UserRepository {
         hql.append("select u from "+User.class.getName()+" u where u.username=:username");
         map.put("username",username);
         return this.createHQLQueryByMapParams(User.class,hql.toString(),map).uniqueResult();
+    }
+
+    @Override
+    public void createUserByUsernameAndPwd(User user) {
+        this.getSession().save(user);
     }
 }

@@ -1,4 +1,4 @@
-package com.niu.study.controller;
+package com.niu.study.controller.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,5 +26,13 @@ public class providerController {
         return "success";
     }
 
+    @ApiOperation("测试map传递参数")
+    @RequestMapping(value = "/custorm", method = RequestMethod.GET)
+    public String custorm(@RequestParam("phoneNumbers") String phoneNumbers) {
+        //String phoneNumbers = map.get("phoneNumbers");
+        System.err.println(phoneNumbers);
+        System.err.println("sss");
+        return "success";
+    }
 
 }

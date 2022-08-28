@@ -13,7 +13,7 @@
   <!-- Bootstrap 核心 JavaScript 文件 -->
   <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <style type="text/css">
-    body{background: url(/static/img/4.jpg) no-repeat;background-size:1350px 600px;font-size: 1px;}
+    body{background: url(/img/4.jpg) no-repeat;background-size:1350px 600px;font-size: 1px;}
     .form{background: rgba(255,255,255,0.2);width:400px;margin:100px auto;}
     #login_form{display: block;}
     #register_form{display: none;}
@@ -58,6 +58,7 @@
         </div>
       </div>
     </form>
+    <iframe id="iFrame" name="iFrame" src="about:blank" style="display:none;"></iframe>
   </div>
 
   <div class="form row">
@@ -90,27 +91,27 @@
 </div>
 <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
+  // 设置点击submit之后不刷新当前页面
+   $("#login_form").attr("target","iFrame");
+
+
   $("#loginButton").click(function () {
     var username=$("#username").val().trim()
     var password=$("#password").val().trim()
     if (username==null||password==null||username.length==0||password.length==0){
       return alert("用户名或密码不能为空!!!")
     }
-    debugger
-    var url="/api/chunkLogin";
+    var url="/portal/login/chunkLogin";
     var params={username:username,password:password}
-    //var request=$.get("/api/chunkLogin");
-    // request.success(function (result) {
-    //   alert(result)
-    // })
-    // request.error(function (res) {
-    //   alert("sss")
-    // })
-    $.get(url,params,function (data) {
-      console.log(data)
-      alert($.error(data))
-    })
-
+    $.get(url,params,function (res){
+      debugger
+      if (res.state==100){
+        location.href="/portal/api/home";
+      }else{
+        alert(res.message)
+        this.location.href=location.reload();
+      }
+    });
   })
   $(function() {
     $("#register_btn").click(function() {

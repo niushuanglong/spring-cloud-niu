@@ -17,6 +17,7 @@ package com.niu.study.service.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.niu.study.domain.base.BaseDTO;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +30,7 @@ import java.util.Set;
  * @author Zheng Jie
  * @date 2018-11-23
  */
-@Getter
-@Setter
+@Data
 public class UserDto extends BaseDTO implements Serializable {
 
     private Long id;
@@ -66,4 +66,27 @@ public class UserDto extends BaseDTO implements Serializable {
     private Boolean isAdmin = false;
 
     private Date pwdResetTime;
+
+
+    public UserDto(Long id, Set<RoleSmallDto> roles, Set<JobSmallDto> jobs, DeptSmallDto dept, Long deptId,
+                   String username, String nickName, String email, String phone, String gender, String avatarName,
+                   String avatarPath, String password, Boolean enabled, Boolean isAdmin, Date pwdResetTime) {
+        this.id = id;
+        this.roles = roles;
+        this.jobs = jobs;
+        this.dept = dept;
+        this.deptId = deptId;
+        this.username = username;
+        this.nickName = nickName;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.avatarName = avatarName;
+        this.avatarPath = avatarPath;
+        this.password = password;
+        this.enabled = enabled;
+        this.isAdmin = isAdmin;
+        this.pwdResetTime = pwdResetTime;
+    }
+
 }
