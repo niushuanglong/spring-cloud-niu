@@ -1,20 +1,15 @@
 package com.niu.study.utils;
 
 import com.thoughtworks.xstream.core.util.Base64Encoder;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.lang3.RegExUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;

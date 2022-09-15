@@ -5,3 +5,10 @@ spring:
     username: niu
     port: 5672
     host: 192.168.3.85
+#开启OKhttp
+ribbon:
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true

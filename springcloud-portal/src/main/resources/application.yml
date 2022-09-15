@@ -41,3 +41,11 @@ task:
     keep-alive-seconds: 60
     # 队列容量
     queue-capacity: 50
+
+#开启OKhttp
+ribbon:
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true

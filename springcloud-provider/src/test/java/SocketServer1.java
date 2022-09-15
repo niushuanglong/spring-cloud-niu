@@ -1,26 +1,33 @@
-import org.aspectj.weaver.ast.Var;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
 
 public class SocketServer1 {
     public static void main(String[] args) throws Exception {
 
-        ServerSocket serverSocket=new ServerSocket(9999);
-        Socket accept = serverSocket.accept();
-        InputStream inputStream = accept.getInputStream();
-        ByteArrayOutputStream bt=new ByteArrayOutputStream();
-        byte[] b= new byte[1024];
-        int len;
-        while ((len=inputStream.read(b))!=-1){
-            bt.write(b,0,len);
+        PrintStream stream=new PrintStream(new FileOutputStream("6.txt"));
+        stream.println("账上");
+        stream.println("呵呵哈哈哈");
+        boolean b = stream.checkError();
+        stream.flush();
+        stream.close();
+        File file=new File("读取.txt");
+        FileReader reader=new FileReader("读取.txt");
+        FileWriter writer=new FileWriter("输出.txt");
+        BufferedWriter bufferedWriter=new BufferedWriter(writer);
+        BufferedReader bufferedReader=new BufferedReader(reader);
+        String line=null;
+
+        while ((line=bufferedReader.readLine())!=null){
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
         }
-        System.err.println(bt.toString());
-//try {
-//    close需要关闭  没写 懒得写
-//}
+        bufferedWriter.close();
+        bufferedReader.close();
+
+
+
+
+
+
     }
 }

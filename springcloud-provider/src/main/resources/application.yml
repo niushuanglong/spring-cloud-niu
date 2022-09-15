@@ -20,3 +20,10 @@ eureka:
       defaultZone: http://192.168.10.175:8010/eureka/
   instance:
     instance-id: provider8001
+#开启OKhttp
+ribbon:
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true

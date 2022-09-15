@@ -15,6 +15,7 @@
         <module>springcloud-eureka-register</module>
         <module>springcloud-provider</module>
         <module>springcloud-portal</module>
+        <module>springcloud-utils</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -42,6 +43,12 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>2.1.4.RELEASE</version>
+                <optional>true</optional>
+            </dependency>
             <!--SpringBoot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

@@ -12,7 +12,7 @@ import com.niu.study.service.dto.UserDto;
 import java.util.Set;
 
 //dto 转实体用from  实体转dto用TO
-public class UserAssembler {
+public class UserAssembler extends Biz{
 
     public UserDto toUser(User user) {
 
