@@ -2,7 +2,6 @@ package com.niu.study;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -26,7 +25,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("UI Client")
+                .title("牛双龙客户端API欢迎您访问!")
                 .description("UI Client REST API")
                 .version("1.0.0")
                 .build();

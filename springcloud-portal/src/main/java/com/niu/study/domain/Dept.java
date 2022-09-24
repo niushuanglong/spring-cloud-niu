@@ -18,48 +18,23 @@ package com.niu.study.domain;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.niu.study.domain.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-03-25
-*/
+ * 部门信息
+ */
 @Entity
-@Getter
-@Setter
 @Table(name="sys_dept")
 public class Dept extends BaseEntity implements Serializable {
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dept dept = (Dept) o;
-        return Objects.equals(subCount, dept.subCount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(subCount);
-    }
-
-    @Id
-    @Column(name = "dept_id")
-    @NotNull(groups = Update.class)
-    @ApiModelProperty(value = "ID", hidden = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "depts")
-    @ApiModelProperty(value = "角色")
     private Set<Role> roles;
 
     @ApiModelProperty(value = "排序")
@@ -69,14 +44,26 @@ public class Dept extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "部门名称")
     private String name;
 
-    @NotNull
-    @ApiModelProperty(value = "是否启用")
-    private Boolean enabled;
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-    @ApiModelProperty(value = "上级部门")
-    private Long pid;
+    public Integer getDeptSort() {
+        return deptSort;
+    }
 
-    @ApiModelProperty(value = "子节点数目", hidden = true)
-    private Integer subCount = 0;
+    public String getName() {
+        return name;
+    }
+
+    public Dept(){
+    }
+
+    public Dept(Set<Role> roles, Integer deptSort, String name) {
+        this.roles = roles;
+        this.deptSort = deptSort;
+        this.name = name;
+    }
+
 
 }

@@ -16,32 +16,19 @@
 package com.niu.study.domain.base;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
+import java.util.Objects;
 
-/**
- * 通用字段， is_del 根据需求自行添加
- * @author Zheng Jie
- * @Date 2019年10月24日20:46:32
- */
-@Getter
-@Setter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements Serializable {
+public class BaseEntity extends IEntity implements Serializable {
 
     @CreatedBy
     @Column(name = "create_by", updatable = false)
@@ -63,24 +50,44 @@ public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "更新时间", hidden = true)
     private Timestamp updateTime;
 
-    /* 分组校验 */
-    public @interface Create {}
+    public String getCreateBy() {
+        return createBy;
+    }
 
-    /* 分组校验 */
-    public @interface Update {}
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public BaseEntity() {
+    }
+
+    public BaseEntity(Long id, String ip, boolean enabled, String createBy, String updateBy, Timestamp createTime, Timestamp updateTime) {
+        super(id, ip, enabled);
+        this.createBy = createBy;
+        this.updateBy = updateBy;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
     @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this);
-        Field[] fields = this.getClass().getDeclaredFields();
-        try {
-            for (Field f : fields) {
-                f.setAccessible(true);
-                builder.append(f.getName(), f.get(this)).append("\n");
-            }
-        } catch (Exception e) {
-            builder.append("toString builder encounter an error");
-        }
-        return builder.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        BaseEntity that = (BaseEntity) o;
+        return Objects.equals(createBy, that.createBy) && Objects.equals(updateBy, that.updateBy) && Objects.equals(createTime, that.createTime) && Objects.equals(updateTime, that.updateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), createBy, updateBy, createTime, updateTime);
     }
 }

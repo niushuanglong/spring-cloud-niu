@@ -20,11 +20,13 @@ import com.niu.study.domain.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,13 +38,6 @@ import java.util.Set;
 @Setter
 @Table(name = "sys_menu")
 public class Menu extends BaseEntity implements Serializable {
-
-    @Id
-    @Column(name = "menu_id")
-    @NotNull(groups = {Update.class})
-    @ApiModelProperty(value = "ID", hidden = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "menus")
@@ -76,11 +71,12 @@ public class Menu extends BaseEntity implements Serializable {
 
     @Column(columnDefinition = "bit(1) default 0")
     @ApiModelProperty(value = "缓存")
-    private Boolean cache;
+    @Type(type = "java.lang.Boolean")
+    private boolean cache=true;
 
     @Column(columnDefinition = "bit(1) default 0")
-    @ApiModelProperty(value = "是否隐藏")
-    private Boolean hidden;
+    @Type(type = "java.lang.Boolean")
+    private boolean hidden=false;
 
     @ApiModelProperty(value = "上级菜单")
     private Long pid;
@@ -89,22 +85,9 @@ public class Menu extends BaseEntity implements Serializable {
     private Integer subCount = 0;
 
     @ApiModelProperty(value = "外链菜单")
-    private Boolean iFrame;
+    @Type(type = "java.lang.Boolean")
+    private boolean iFrame=true;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Menu menu = (Menu) o;
-        return Objects.equals(id, menu.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
 }

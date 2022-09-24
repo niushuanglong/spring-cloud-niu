@@ -3,6 +3,7 @@ package com.niu.study.service.impl;
 import com.niu.study.ExceptionDealWth.CustomizeException;
 import com.niu.study.application.UserAssembler;
 import com.niu.study.domain.User;
+import com.niu.study.domain.base.IBeansFactoryService;
 import com.niu.study.repository.UserRepository;
 import com.niu.study.service.UserService;
 import com.niu.study.service.dto.UserDto;
@@ -20,10 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private IBeansFactoryService beansFactoryService;
 
     @Override
     public void createUser(UserDto dto) {
-        User user=new UserAssembler().fromUser(dto);
+        User user=new UserAssembler(beansFactoryService).fromUser(dto);
         userRepository.createUserByUsernameAndPwd(user);
     }
 
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isNotBlank(accessToken)) throw new CustomizeException("令牌为空!");
         Map<String, String> map = JWTTokenUtil.verifyTokenAndGetClaims(accessToken);
         User user = userRepository.findUsername(map.get(0));
-        return new UserAssembler().toUser(user);
+        return new UserAssembler(beansFactoryService).toUser(user);
     }
 
 

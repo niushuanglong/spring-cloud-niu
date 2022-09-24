@@ -20,30 +20,22 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-/**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+
 @Entity
 @Getter
 @Setter
 @Table(name="sys_dict")
 public class Dict extends BaseEntity implements Serializable {
 
-    @Id
-    @Column(name = "dict_id")
-    @NotNull(groups = Update.class)
-    @ApiModelProperty(value = "ID", hidden = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToMany(mappedBy = "dict",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "dict",cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true)
     private List<DictDetail> dictDetails;
 
     @NotBlank

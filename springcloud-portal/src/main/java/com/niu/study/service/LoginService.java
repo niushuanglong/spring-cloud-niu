@@ -2,9 +2,8 @@ package com.niu.study.service;
 
 import com.niu.study.domain.AccessToken;
 import com.niu.study.domain.User;
-import com.niu.study.utils.JsonResult;
+import com.niu.study.utils.enums.JsonResult;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface LoginService {
@@ -15,7 +14,7 @@ public interface LoginService {
      * @param password
      * @return
      */
-    JsonResult chunkLoginInfo(String username, String password, HttpServletRequest request);
+    JsonResult chunkLoginInfo(String username, String password, HttpServletResponse response);
 
     /**
      * 根据令牌查询

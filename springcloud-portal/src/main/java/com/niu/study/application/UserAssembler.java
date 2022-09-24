@@ -1,18 +1,16 @@
 package com.niu.study.application;
 
-import com.niu.study.domain.Dept;
-import com.niu.study.domain.Job;
-import com.niu.study.domain.Role;
 import com.niu.study.domain.User;
-import com.niu.study.service.dto.DeptSmallDto;
-import com.niu.study.service.dto.JobSmallDto;
-import com.niu.study.service.dto.RoleSmallDto;
+import com.niu.study.domain.base.BizBaseAssembler;
+import com.niu.study.domain.base.IBeansFactoryService;
 import com.niu.study.service.dto.UserDto;
 
-import java.util.Set;
-
 //dto 转实体用from  实体转dto用TO
-public class UserAssembler extends Biz{
+public class UserAssembler extends BizBaseAssembler {
+
+    public UserAssembler(IBeansFactoryService beansFactoryService) {
+        super(beansFactoryService);
+    }
 
     public UserDto toUser(User user) {
 
@@ -22,7 +20,7 @@ public class UserAssembler extends Biz{
 
         return new UserDto(user.getId(), null, null, null,null,user.getUsername(),
                 user.getNickName(), user.getEmail(), user.getPhone(), user.getGender(), user.getAvatarName(), user.getAvatarPath(),
-                user.getPassword(), user.getEnabled(), user.getIsAdmin(), user.getPwdResetTime());
+                user.getPassword(), user.isEnabled(), user.isAdmin(), user.getPwdResetTime());
     }
     public User fromUser(UserDto dto) {
 

@@ -1,40 +1,66 @@
 package com.niu.study.config;
 
-import com.niu.study.utils.JsonResult;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.json.JSONUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import com.google.gson.JsonObject;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Aspect
 @Component
 public class GlobalAOP {
-    @Around("execution(* com.niu.study.web.*.*(..))")
-    public Object around(ProceedingJoinPoint jp) {
-        JsonResult<Object> jsonResult = new JsonResult<>();
+    private static Logger logger = LoggerFactory.getLogger(GlobalAOP.class);
+    @Pointcut("execution(* com.niu.study.web.api.LoginController.*(..))")
+    public void pointCut() {
+    }
+
+
+    @Around("pointCut()")
+    public Object around(ProceedingJoinPoint jp) throws Throwable {
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        assert sra != null;
+        HttpServletRequest request = sra.getRequest();
+        HttpServletResponse response = sra.getResponse();
+        String url = request.getRequestURL().toString();
+        String method = request.getMethod();
+        String queryString = request.getQueryString();
+        long startTime = System.currentTimeMillis();
+        logger.info("{url:{}, method:{}, queryString:{}}", url, method, queryString);
+        Object rs;
+        boolean successAble = false;
+        JsonObject paramsJson = new JsonObject();
+        Cookie cookie = new Cookie("aaa", "aaaa");
+        cookie.setMaxAge(24 * 60 * 60 * 2);
+        response.addCookie(cookie);
         try {
-            String name = jp.getSignature().getName();//获取调用该类的方法名
-            try {
-                Object [] args = jp.getArgs();//获取参数
-                System.out.println("Before->The "+name+" method begins");
-                System.out.println("Before->The params of the "+name+" method are "+args[0]+","+args[1]);
-                Object result = jp.proceed();// 执行目标对象内的方法
-            } catch (Exception e){
-                e.printStackTrace();
-                StringWriter writer = new StringWriter();
-                e.printStackTrace(new PrintWriter(writer, true));
-                String exceptionMsg = writer.toString();
-                System.err.println("exceptionMsg 异常为:->"+exceptionMsg);
-                jsonResult.setMessage(e.getMessage()).setState(400).setData(null);
-            }finally {
-                System.out.println("After->"+"The "+name+" method ends"+" 桃李不言下自成蹊!牛双龙");// @After注解所修饰的方法
+            Object[] params = jp.getArgs();
+            for (int i = 0; i < params.length; i++) {
+                if (params[i] instanceof BindingResult || params[i] instanceof HttpRequest || params[i] instanceof HttpResponse){
+                    continue;
+                }
+                paramsJson.addProperty("param-" + i, JSONUtil.toJsonPrettyStr(params[i]));
             }
-        } catch (Throwable e) {
-            System.out.println("AfterThrowing->"+e);// @AfterThrowing注解所修饰的方法
+            rs = jp.proceed();
+            successAble = true;
+        } finally {
+            logger.info("{url:{}, method:{}, success-able:{}, exe-time:{}, params:{}}", url, method, successAble, System.currentTimeMillis() - startTime, paramsJson);
         }
-        return jsonResult;
+        return rs;
     }
 }

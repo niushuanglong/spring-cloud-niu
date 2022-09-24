@@ -1,18 +1,14 @@
 package com.niu.study.config;
 
 import com.niu.study.ExceptionDealWth.CustomizeException;
-import com.niu.study.utils.JsonResult;
+import com.niu.study.utils.enums.JsonResult;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.niu.study.domain.SYSCONSTANT.STATUS_ERR_SERVER;
 
 /**
  * Controller层处理异常
@@ -21,11 +17,13 @@ import static com.niu.study.domain.SYSCONSTANT.STATUS_ERR_SERVER;
 
 @RestControllerAdvice
 public class GlobalControllerAdviceException {
-    @ExceptionHandler(RuntimeException.class)
-    public JsonResult<Void> success(RuntimeException e){
+    @ExceptionHandler(CustomizeException.class)
+    public JsonResult<Void> success(CustomizeException e){
         JsonResult<Void> jsonResult=new JsonResult<>(e);
         if(e instanceof CustomizeException) {
             jsonResult.setMessage(e.getMessage());
+            jsonResult.setData(null);
+            jsonResult.setCode(500);
         }
         return jsonResult;
     }

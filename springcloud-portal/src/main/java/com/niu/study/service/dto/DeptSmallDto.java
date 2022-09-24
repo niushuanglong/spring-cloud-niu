@@ -15,6 +15,8 @@
  */
 package com.niu.study.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -23,6 +25,8 @@ import java.io.Serializable;
 * @author Zheng Jie
 * @date 2019-6-10 16:32:18
 */
+@ApiModel(value = "部门信息")
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Data
 public class DeptSmallDto implements Serializable {
 

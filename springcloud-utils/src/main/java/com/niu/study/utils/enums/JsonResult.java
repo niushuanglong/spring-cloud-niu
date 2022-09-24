@@ -1,4 +1,4 @@
-package com.niu.study.utils;
+package com.niu.study.utils.enums;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class JsonResult<T> implements Serializable {
     /**
      * 状态码
      */
-    private int state = 100;//100 ok,400 error
+    private int code = 100;//100 ok,400 error
     /**
      * 状态码对应的信息
      */
@@ -41,12 +41,12 @@ public class JsonResult<T> implements Serializable {
     }
 
     public JsonResult(Throwable e) {
-        this.state = 0;
+        this.code = 400;
         this.message = e.getMessage();
     }
 
-    public JsonResult(int state, String message, Object data) {
-        this.state = state;
+    public JsonResult(int code, String message, Object data) {
+        this.code = code;
         this.message = message;
         this.data = data;
     }
