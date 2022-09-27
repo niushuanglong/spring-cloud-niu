@@ -8,6 +8,7 @@ import com.niu.study.repository.JpaHibernateRepository;
 import com.niu.study.repository.UserRepository;
 import com.niu.study.service.LoginService;
 import com.niu.study.utils.CalendarUtils;
+import com.niu.study.utils.IPUtils;
 import com.niu.study.utils.JWTTokenUtil;
 import com.niu.study.utils.Sm4Utils;
 import com.niu.study.utils.enums.JsonResult;
@@ -49,12 +50,10 @@ public class LoginServiceImpl extends JpaHibernateRepository implements LoginSer
         Map<String,String > map=new HashMap<>();
         map.put("username",username);
         String token = JWTTokenUtil.createToken(map, 24 * 60 * 60 * 2 );
-
         //登陆的时候创建token 和超时时间
-        AccessToken accessToken = new AccessToken(token, CalendarUtils.addOneDay(new Date(),24));
-        response.addCookie(new Cookie("token",accessToken.getAccessToken()));
+        AccessToken accessToken = new AccessToken(token, CalendarUtils.addOneDay(new Date(),24), IPUtils.getIpAddr());
         tokenRepository.saveToken(accessToken);
-        redisTemplate.opsForValue().setIfAbsent("accessToken",accessToken,24, TimeUnit.HOURS);
+        redisTemplate.opsForValue().setIfAbsent("token",accessToken,24, TimeUnit.HOURS);
         return new JsonResult(accessToken);
     }
     //暂时未加重复用户判断..

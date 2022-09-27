@@ -17,9 +17,14 @@ public class AccessToken extends BaseEntity implements Serializable {
     @Column(name = "access_token")
     private String accessToken;
     @Column(name = "expire_time", updatable = false)
-    @ApiModelProperty(value = "过期时间", hidden = true)
     private Date expireTime;
 
+    private String ip;
+
+    @Override
+    public String getIp() {
+        return ip;
+    }
 
     public String getAccessToken() {
         return accessToken;
@@ -32,9 +37,10 @@ public class AccessToken extends BaseEntity implements Serializable {
     public AccessToken() {
     }
 
-    public AccessToken(String accessToken, Date expireTime) {
+    public AccessToken(String accessToken, Date expireTime,String ip) {
         this.accessToken = accessToken;
         this.expireTime = expireTime;
+        this.ip=ip;
     }
 
 

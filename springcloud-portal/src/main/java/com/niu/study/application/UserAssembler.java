@@ -18,7 +18,7 @@ public class UserAssembler extends BizBaseAssembler {
                    String username, String nickName, String email, String phone, String gender, String avatarName,
                    String avatarPath, String password, Boolean enabled, Boolean isAdmin, Date pwdResetTime*/
 
-        return new UserDto(user.getId(), null, null, null,null,user.getUsername(),
+        return new UserDto(user.getId().toString(), null, null, null,null,user.getUsername(),
                 user.getNickName(), user.getEmail(), user.getPhone(), user.getGender(), user.getAvatarName(), user.getAvatarPath(),
                 user.getPassword(), user.isEnabled(), user.isAdmin(), user.getPwdResetTime());
     }

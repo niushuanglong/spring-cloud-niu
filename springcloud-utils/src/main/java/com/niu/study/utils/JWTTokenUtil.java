@@ -49,13 +49,16 @@ public class JWTTokenUtil {
      * @param jwt_token
      * @return token
      */
-    public static Map<String,String> verifyTokenAndGetClaims(String jwt_token) {
+    public static Map<String,Object> verifyTokenAndGetClaims(String jwt_token) {
         try {
-            Map<String,String> result = new HashMap<String,String>();
+            Map<String,Object> result = new HashMap<String,Object>();
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
             DecodedJWT jwt = verifier.verify(jwt_token);
             Map<String, Claim> claims=jwt.getClaims();
             for (String key : claims.keySet()) {
+                if (key.equals("exp")){
+                    result.put(key, claims.get(key).asDate());
+                }
                 result.put(key, claims.get(key).asString());
             }
             return result;

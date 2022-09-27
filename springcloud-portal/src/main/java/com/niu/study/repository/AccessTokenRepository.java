@@ -28,9 +28,10 @@ public interface AccessTokenRepository{
      */
     void updateToken(AccessToken token);
 
-
-
-
-
-
+    /**
+     * 根据token id获取token
+     * @param id
+     * @return
+     */
+    AccessToken findByTokenId(String id);
 }

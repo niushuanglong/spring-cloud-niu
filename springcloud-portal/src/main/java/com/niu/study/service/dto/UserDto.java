@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,47 +32,48 @@ import java.util.List;
  * @date 2018-11-23
  */
 @Data
-@ApiModel(value = "用户DTO信息")
+@ApiModel(value = "UserDto",description = "用户DTO信息")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class UserDto extends BaseDTO implements Serializable {
-    @ApiModelProperty(name = "id")
-    private Long id;
-    @ApiModelProperty(name = "角色信息")
-    private List<RoleSmallDto> roles;
-    @ApiModelProperty(name = "岗位信息")
-    private List<JobSmallDto> jobs;
-    @ApiModelProperty(name = "部门信息")
+    @ApiModelProperty(value = "id")
+    private String id;
+    @ApiModelProperty(value = "角色信息")
+    private List<RoleSmallDto> roles=new ArrayList<>();
+    @ApiModelProperty(value = "岗位信息")
+    private List<JobSmallDto> jobs=new ArrayList<>();
+    @ApiModelProperty(value = "部门信息")
     private DeptSmallDto dept;
-    @ApiModelProperty(name = "部门id")
+    @ApiModelProperty(value = "部门id")
     private Long deptId;
-    @ApiModelProperty(name = "用户名")
+    @ApiModelProperty(value = "用户名")
     private String username;
-    @ApiModelProperty(name = "昵称")
+    @ApiModelProperty(value = "昵称")
     private String nickName;
-    @ApiModelProperty(name = "邮箱")
+    @ApiModelProperty(value = "邮箱")
     private String email;
-    @ApiModelProperty(name = "手机号")
+    @ApiModelProperty(value = "手机号")
     private String phone;
-    @ApiModelProperty(name = "性别")
+    @ApiModelProperty(value = "性别")
     private String gender;
-    @ApiModelProperty(name = "头像名称")
+    @ApiModelProperty(value = "头像名称")
     private String avatarName;
-    @ApiModelProperty(name = "头像路径")
+    @ApiModelProperty(value = "头像路径")
     private String avatarPath;
-    @ApiModelProperty(name = "密码")
+    @ApiModelProperty(value = "密码")
     private String password;
-    @ApiModelProperty(name = "是否开启")
-    private Boolean enabled;
-    @ApiModelProperty(name = "是否为admin账号")
+    @ApiModelProperty(value = "是否开启")
+    private Boolean enabled = false;
+    @ApiModelProperty(value = "是否为admin账号")
     private Boolean isAdmin = false;
-    @ApiModelProperty(name = "最后修改密码的时间")
+    @ApiModelProperty(value = "最后修改密码的时间")
     @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
     private Date pwdResetTime;
+
 
     public UserDto() {
     }
 
-    public UserDto(Long id, List<RoleSmallDto> roles, List<JobSmallDto> jobs, DeptSmallDto dept, Long deptId,
+    public UserDto(String id,List<RoleSmallDto> roles, List<JobSmallDto> jobs, DeptSmallDto dept, Long deptId,
                    String username, String nickName, String email, String phone, String gender, String avatarName,
                    String avatarPath, String password, Boolean enabled, Boolean isAdmin, Date pwdResetTime) {
         this.id = id;

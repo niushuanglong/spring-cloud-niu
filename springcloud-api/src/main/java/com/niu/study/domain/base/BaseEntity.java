@@ -69,7 +69,7 @@ public class BaseEntity extends IEntity implements Serializable {
     public BaseEntity() {
     }
 
-    public BaseEntity(Long id, String ip, boolean enabled, String createBy, String updateBy, Timestamp createTime, Timestamp updateTime) {
+    public BaseEntity(String id, String ip, boolean enabled, String createBy, String updateBy, Timestamp createTime, Timestamp updateTime) {
         super(id, ip, enabled);
         this.createBy = createBy;
         this.updateBy = updateBy;

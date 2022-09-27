@@ -70,8 +70,8 @@ public class HandlerFilter implements Filter {
             if (new Date().compareTo(token.getExpireTime())==1){
                 throw new RuntimeException("登陆超时!");
             }
-            Map<String, String> map = JWTTokenUtil.verifyTokenAndGetClaims(token.getAccessToken());
-            String username = map.get("username");
+            Map<String, Object> map = JWTTokenUtil.verifyTokenAndGetClaims(token.getAccessToken());
+            String username = map.get("username").toString();
             User user=loginService.findUserByUsername(username);
             if (user==null){
                 throw new RuntimeException("密码错误!");

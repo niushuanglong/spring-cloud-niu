@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,9 @@ public class UserController {
 
     @ApiOperation(value = "查询用户接口",httpMethod = "GET")
     @RequestMapping(value = "/queryUser",method = RequestMethod.GET)
-    public UserDto queryUser(HttpServletRequest request){
-        String accessToken = request.getAttribute("accessToken").toString();
+    public UserDto queryUser( HttpServletRequest request){
+        //这里的token是token的id
+        String accessToken = request.getHeader("accessToken");
         return userService.queryUser(accessToken);
     }
 

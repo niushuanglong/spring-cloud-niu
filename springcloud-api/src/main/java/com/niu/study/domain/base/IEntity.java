@@ -34,7 +34,7 @@ public class IEntity implements Serializable {
     @NotNull
     @GeneratedValue(generator = "paymentableGenerator")
     @GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-    private Long id;
+    private String id;
 
 
     @Column(name = "ip",length = 100)
@@ -56,7 +56,7 @@ public class IEntity implements Serializable {
         return Objects.hash(id, ip, enabled);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -71,7 +71,7 @@ public class IEntity implements Serializable {
     public IEntity() {
     }
 
-    public IEntity(Long id, String ip, boolean enabled) {
+    public IEntity(String id, String ip, boolean enabled) {
         this.id = id;
         this.ip = ip;
         this.enabled = enabled;

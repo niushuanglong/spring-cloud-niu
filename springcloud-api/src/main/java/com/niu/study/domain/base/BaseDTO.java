@@ -10,21 +10,17 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.sql.Date;
 
-/**
- * @author Zheng Jie
- * @date 2019年10月24日20:48:53
- */
 @Getter
 @Setter
 public class BaseDTO  implements Serializable {
-    @ApiModelProperty(name = "创建人")
+    @ApiModelProperty(value = "创建人")
     private String createBy;
-    @ApiModelProperty(name = "更新人")
+    @ApiModelProperty(value = "更新人")
     private String updateBy;
-    @ApiModelProperty(name = "创建时间")
+    @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
     private Date createTime;
-    @ApiModelProperty(name = "更新时间")
+    @ApiModelProperty(value = "更新时间")
     @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
     private Date updateTime;
 

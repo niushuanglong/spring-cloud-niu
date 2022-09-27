@@ -34,4 +34,9 @@ public class AccessTokenImpl extends JpaHibernateRepository implements AccessTok
         this.getSession().update(token);
     }
 
+    @Override
+    public AccessToken findByTokenId(String id) {
+        return this.getSession().get(AccessToken.class,id);
+    }
+
 }
