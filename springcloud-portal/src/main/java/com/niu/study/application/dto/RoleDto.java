@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.niu.study.domain.base.BaseDTO;
 import lombok.Getter;
@@ -21,58 +21,30 @@ import lombok.Setter;
 
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Zheng Jie
- * @date 2018-12-17
+ * @date 2018-11-23
  */
 @Getter
 @Setter
-public class MenuDto extends BaseDTO implements Serializable {
+public class RoleDto extends BaseDTO implements Serializable {
 
     private Long id;
 
-    private List<MenuDto> children;
+    private Set<MenuDto> menus;
 
-    private Integer type;
+    private Set<DeptDto> depts;
 
-    private String permission;
+    private String name;
 
-    private String title;
+    private String dataScope;
 
-    private Integer menuSort;
+    private Integer level;
 
-    private String path;
-
-    private String component;
-
-    private Long pid;
-
-    private Integer subCount;
-
-    private Boolean iFrame;
-
-    private Boolean cache;
-
-    private Boolean hidden;
-
-    private String componentName;
-
-    private String icon;
-
-    public Boolean getHasChildren() {
-        return subCount > 0;
-    }
-
-    public Boolean getLeaf() {
-        return subCount <= 0;
-    }
-
-    public String getLabel() {
-        return title;
-    }
+    private String description;
 
     @Override
     public boolean equals(Object o) {
@@ -82,8 +54,8 @@ public class MenuDto extends BaseDTO implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MenuDto menuDto = (MenuDto) o;
-        return Objects.equals(id, menuDto.id);
+        RoleDto roleDto = (RoleDto) o;
+        return Objects.equals(id, roleDto.id);
     }
 
     @Override

@@ -1,14 +1,14 @@
 package com.niu.study.service.impl;
 
 import com.niu.study.ExceptionDealWth.CustomizeException;
-import com.niu.study.application.UserAssembler;
+import com.niu.study.application.assembler.UserAssembler;
 import com.niu.study.domain.AccessToken;
 import com.niu.study.domain.User;
 import com.niu.study.domain.base.IBeansFactoryService;
 import com.niu.study.repository.AccessTokenRepository;
 import com.niu.study.repository.UserRepository;
 import com.niu.study.service.UserService;
-import com.niu.study.service.dto.UserDto;
+import com.niu.study.application.dto.UserDto;
 import com.niu.study.utils.JWTTokenUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

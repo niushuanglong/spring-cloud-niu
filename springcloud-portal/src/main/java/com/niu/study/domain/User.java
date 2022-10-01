@@ -1,6 +1,7 @@
 package com.niu.study.domain;
 
 import com.niu.study.domain.base.BaseEntity;
+import com.niu.study.utils.IPUtils;
 import com.niu.study.utils.Sm4Utils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -11,7 +12,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -77,6 +77,7 @@ public class User extends BaseEntity implements Serializable {
                 String nickName, String email, String phone, String gender,
                 String avatarName, String avatarPath, String password,
                 boolean enabled, boolean isAdmin, Date pwdResetTime) {
+        this.setCreateInfo(username,username,new Date(),new Date());
         this.roles = roles;
         this.jobs = jobs;
         this.dept = dept;

@@ -1,7 +1,7 @@
 package com.niu.study.web.api;
 
 import com.niu.study.service.LoginService;
-import com.niu.study.service.dto.UserDto;
+import com.niu.study.application.dto.UserDto;
 import com.niu.study.utils.enums.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

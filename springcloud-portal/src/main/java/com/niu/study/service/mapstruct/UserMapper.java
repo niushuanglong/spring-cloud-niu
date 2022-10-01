@@ -18,7 +18,7 @@ package com.niu.study.service.mapstruct;
 
 import com.niu.study.domain.User;
 import com.niu.study.domain.base.BaseMapper;
-import com.niu.study.service.dto.UserDto;
+import com.niu.study.application.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

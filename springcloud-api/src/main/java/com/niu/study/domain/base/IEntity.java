@@ -15,7 +15,6 @@
  */
 package com.niu.study.domain.base;
 
-import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -36,11 +35,7 @@ public class IEntity implements Serializable {
     @GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
     private String id;
 
-
-    @Column(name = "ip",length = 100)
-    private String ip;
     @NotNull
-    @ApiModelProperty(value = "是否启用")
     private boolean enabled=true;
 
     @Override
@@ -48,32 +43,21 @@ public class IEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IEntity iEntity = (IEntity) o;
-        return enabled == iEntity.enabled && Objects.equals(id, iEntity.id) && Objects.equals(ip, iEntity.ip);
+        return enabled == iEntity.enabled && Objects.equals(id, iEntity.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ip, enabled);
+        return Objects.hash(id, enabled);
     }
 
     public String getId() {
         return id;
     }
 
-    public String getIp() {
-        return ip;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
 
-    public IEntity() {
-    }
 
-    public IEntity(String id, String ip, boolean enabled) {
-        this.id = id;
-        this.ip = ip;
-        this.enabled = enabled;
-    }
 }

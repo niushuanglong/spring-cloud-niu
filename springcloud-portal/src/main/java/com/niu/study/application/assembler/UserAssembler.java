@@ -1,9 +1,9 @@
-package com.niu.study.application;
+package com.niu.study.application.assembler;
 
 import com.niu.study.domain.User;
 import com.niu.study.domain.base.BizBaseAssembler;
 import com.niu.study.domain.base.IBeansFactoryService;
-import com.niu.study.service.dto.UserDto;
+import com.niu.study.application.dto.UserDto;
 
 //dto 转实体用from  实体转dto用TO
 public class UserAssembler extends BizBaseAssembler {

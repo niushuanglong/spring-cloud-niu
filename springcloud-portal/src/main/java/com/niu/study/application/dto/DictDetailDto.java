@@ -1,4 +1,4 @@
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.niu.study.domain.base.BaseDTO;
 import lombok.Getter;

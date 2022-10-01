@@ -13,20 +13,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
 * @author Zheng Jie
-* @date 2019-04-10
+* @date 2019-6-10 16:32:18
 */
-@Getter
-@Setter
-public class DictSmallDto implements Serializable {
+@ApiModel(value = "部门信息")
+@JsonIgnoreProperties(ignoreUnknown=true)
+@Data
+public class DeptSmallDto implements Serializable {
 
     private Long id;
+
+    private String name;
 }

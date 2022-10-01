@@ -13,22 +13,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
-import com.niu.study.annotation.Query;
 import lombok.Data;
 
+import java.io.Serializable;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+ * @author Zheng Jie
+ * @date 2018-11-23
+ */
 @Data
-public class DictDetailQueryCriteria {
+public class RoleSmallDto implements Serializable {
 
-    @Query(type = Query.Type.INNER_LIKE)
-    private String label;
+    private Long id;
 
-    @Query(propName = "name",joinName = "dict")
-    private String dictName;
+    private String name;
+
+    private Integer level;
+
+    private String dataScope;
 }

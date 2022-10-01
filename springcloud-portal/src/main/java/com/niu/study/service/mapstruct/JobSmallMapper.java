@@ -18,7 +18,7 @@ package com.niu.study.service.mapstruct;
 
 import com.niu.study.domain.Job;
 import com.niu.study.domain.base.BaseMapper;
-import com.niu.study.service.dto.JobSmallDto;
+import com.niu.study.application.dto.JobSmallDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -15,22 +15,21 @@
  */
 package com.niu.study.domain.base;
 
+import com.niu.study.utils.IPUtils;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @MappedSuperclass
 public class BaseEntity extends IEntity implements Serializable {
+    @Column(name = "ip",length = 100)
+    private String ip;
 
-    @CreatedBy
     @Column(name = "create_by", updatable = false)
     @ApiModelProperty(value = "创建人", hidden = true)
     private String createBy;
@@ -40,15 +39,13 @@ public class BaseEntity extends IEntity implements Serializable {
     @ApiModelProperty(value = "更新人", hidden = true)
     private String updateBy;
 
-    @CreationTimestamp
     @Column(name = "create_time", updatable = false)
     @ApiModelProperty(value = "创建时间", hidden = true)
-    private Timestamp createTime;
+    private Date createTime;
 
-    @UpdateTimestamp
     @Column(name = "update_time")
     @ApiModelProperty(value = "更新时间", hidden = true)
-    private Timestamp updateTime;
+    private Date updateTime;
 
     public String getCreateBy() {
         return createBy;
@@ -58,19 +55,19 @@ public class BaseEntity extends IEntity implements Serializable {
         return updateBy;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public Timestamp getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
     public BaseEntity() {
     }
 
-    public BaseEntity(String id, String ip, boolean enabled, String createBy, String updateBy, Timestamp createTime, Timestamp updateTime) {
-        super(id, ip, enabled);
+    public BaseEntity(String ip, String createBy, String updateBy, Date createTime, Date updateTime) {
+        this.ip = ip;
         this.createBy = createBy;
         this.updateBy = updateBy;
         this.createTime = createTime;
@@ -90,4 +87,15 @@ public class BaseEntity extends IEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(super.hashCode(), createBy, updateBy, createTime, updateTime);
     }
+
+
+    /******************************************** 领域方法 ****************************************/
+    public void setCreateInfo(String createBy, String updateBy, Date createTime, Date updateTime){
+        this.ip= IPUtils.getIpAddr();
+        this.createBy = createBy;
+        this.updateBy = updateBy;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+    
 }

@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.niu.study.annotation.DataPermission;
 import com.niu.study.annotation.Query;

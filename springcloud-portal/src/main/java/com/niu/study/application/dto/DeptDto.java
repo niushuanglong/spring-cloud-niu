@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.niu.study.domain.base.BaseDTO;

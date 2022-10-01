@@ -17,7 +17,7 @@ package com.niu.study.service.mapstruct;
 
 import com.niu.study.domain.Role;
 import com.niu.study.domain.base.BaseMapper;
-import com.niu.study.service.dto.RoleSmallDto;
+import com.niu.study.application.dto.RoleSmallDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -1,6 +1,6 @@
 package com.niu.study.service;
 
-import com.niu.study.service.dto.UserDto;
+import com.niu.study.application.dto.UserDto;
 
 public interface UserService {
 

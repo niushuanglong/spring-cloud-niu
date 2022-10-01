@@ -18,7 +18,7 @@ package com.niu.study.service.mapstruct;
 
 import com.niu.study.domain.Dict;
 import com.niu.study.domain.base.BaseMapper;
-import com.niu.study.service.dto.DictSmallDto;
+import com.niu.study.application.dto.DictSmallDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

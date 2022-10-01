@@ -13,24 +13,35 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModel;
-import lombok.Data;
+import com.niu.study.domain.base.BaseDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 import java.io.Serializable;
 
 /**
 * @author Zheng Jie
-* @date 2019-6-10 16:32:18
+* @date 2019-03-29
 */
-@ApiModel(value = "部门信息")
-@JsonIgnoreProperties(ignoreUnknown=true)
-@Data
-public class DeptSmallDto implements Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+public class JobDto extends BaseDTO implements Serializable {
 
     private Long id;
 
+    private Integer jobSort;
+
     private String name;
+
+    private Boolean enabled;
+
+    public JobDto(String name, Boolean enabled) {
+        this.name = name;
+        this.enabled = enabled;
+    }
 }

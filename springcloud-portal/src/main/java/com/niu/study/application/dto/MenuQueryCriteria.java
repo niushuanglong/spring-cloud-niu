@@ -13,29 +13,31 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
-import com.niu.study.domain.base.BaseDTO;
-import lombok.Getter;
-import lombok.Setter;
+import com.niu.study.annotation.Query;
+import lombok.Data;
 
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
-@Getter
-@Setter
-public class DictDto extends BaseDTO implements Serializable {
+ * @author Zheng Jie
+ * 公共查询类
+ */
+@Data
+public class MenuQueryCriteria {
 
-    private Long id;
+    @Query(blurry = "title,component,permission")
+    private String blurry;
 
-    private List<DictDetailDto> dictDetails;
+    @Query(type = Query.Type.BETWEEN)
+    private List<Timestamp> createTime;
 
-    private String name;
+    @Query(type = Query.Type.IS_NULL, propName = "pid")
+    private Boolean pidIsNull;
 
-    private String description;
+    @Query
+    private Long pid;
 }

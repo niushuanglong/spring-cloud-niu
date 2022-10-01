@@ -13,29 +13,38 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.niu.study.annotation.Query;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
-* @author Zheng Jie
-* @date 2019-6-4 14:49:34
-*/
+ * @author Zheng Jie
+ * @date 2018-11-23
+ */
 @Data
-@NoArgsConstructor
-public class JobQueryCriteria {
+public class UserQueryCriteria implements Serializable {
 
-    @Query(type = Query.Type.INNER_LIKE)
-    private String name;
+    @Query
+    private Long id;
+
+    @Query(propName = "id", type = Query.Type.IN, joinName = "dept")
+    private Set<Long> deptIds = new HashSet<>();
+
+    @Query(blurry = "email,username,nickName")
+    private String blurry;
 
     @Query
     private Boolean enabled;
+
+    private Long deptId;
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;

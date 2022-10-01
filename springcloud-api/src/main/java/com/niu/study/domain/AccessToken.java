@@ -2,7 +2,6 @@ package com.niu.study.domain;
 
 
 import com.niu.study.domain.base.BaseEntity;
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,13 +18,6 @@ public class AccessToken extends BaseEntity implements Serializable {
     @Column(name = "expire_time", updatable = false)
     private Date expireTime;
 
-    private String ip;
-
-    @Override
-    public String getIp() {
-        return ip;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }
@@ -40,7 +32,6 @@ public class AccessToken extends BaseEntity implements Serializable {
     public AccessToken(String accessToken, Date expireTime,String ip) {
         this.accessToken = accessToken;
         this.expireTime = expireTime;
-        this.ip=ip;
     }
 
 

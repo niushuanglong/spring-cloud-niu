@@ -13,25 +13,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
 import com.niu.study.annotation.Query;
 import lombok.Data;
 
 
-import java.sql.Timestamp;
-import java.util.List;
-
 /**
- * @author Zheng Jie
- * 公共查询类
- */
+* @author Zheng Jie
+* @date 2019-04-10
+*/
 @Data
-public class RoleQueryCriteria {
+public class DictDetailQueryCriteria {
 
-    @Query(blurry = "name,description")
-    private String blurry;
+    @Query(type = Query.Type.INNER_LIKE)
+    private String label;
 
-    @Query(type = Query.Type.BETWEEN)
-    private List<Timestamp> createTime;
+    @Query(propName = "name",joinName = "dict")
+    private String dictName;
 }

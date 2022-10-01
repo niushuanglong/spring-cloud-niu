@@ -13,22 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.niu.study.service.dto;
+package com.niu.study.application.dto;
 
+import com.niu.study.annotation.Query;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 
 /**
-* @author Zheng Jie
-* @date 2019-6-10 16:32:18
-*/
+ * @author Zheng Jie
+ * 公共查询类
+ */
 @Data
-@NoArgsConstructor
-public class JobSmallDto implements Serializable {
+public class DictQueryCriteria {
 
-    private Long id;
-
-    private String name;
+    @Query(blurry = "name,description")
+    private String blurry;
 }
