@@ -1,9 +1,15 @@
 package com.niu.study.application.assembler;
 
+import com.niu.study.application.dto.RoleSmallDto;
+import com.niu.study.domain.Role;
 import com.niu.study.domain.User;
 import com.niu.study.domain.base.BizBaseAssembler;
 import com.niu.study.domain.base.IBeansFactoryService;
 import com.niu.study.application.dto.UserDto;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 //dto 转实体用from  实体转dto用TO
 public class UserAssembler extends BizBaseAssembler {
@@ -22,18 +28,19 @@ public class UserAssembler extends BizBaseAssembler {
                 user.getNickName(), user.getEmail(), user.getPhone(), user.getGender(), user.getAvatarName(), user.getAvatarPath(),
                 user.getPassword(), user.isEnabled(), user.isAdmin(), user.getPwdResetTime());
     }
-    public User fromUser(UserDto dto) {
-
-        return new User(null, null, null, dto.getUsername(),
+    public User formUser(UserDto dto) {
+        Set<Role> roles = this.formRoles(dto.getRoles());
+        new Role();
+        return new User(roles, null, null, dto.getUsername(),
                 dto.getNickName(), dto.getEmail(), dto.getPhone(), dto.getGender(), dto.getAvatarName(), dto.getAvatarPath(),
                 dto.getPassword(), dto.getEnabled(), dto.getIsAdmin(), dto.getPwdResetTime());
     }
 
-//    public Set<Role> fromRoles(Set<RoleSmallDto> dtoSet) {
-//        return new User(dto.getRoles(), dto.getJobs(), dto.getDept(), dto.getUsername(),
-//                dto.getNickName(), dto.getEmail(), dto.getPhone(), dto.getGender(), dto.getAvatarName(), dto.getAvatarPath(),
-//                dto.getPassword(), dto.getEnabled(), dto.getIsAdmin(), dto.getPwdResetTime());
-//    }
+    public Set<Role> formRoles(List<RoleSmallDto> dtos) {
+        return dtos.stream().map(dto->{
+
+        }).collect(Collectors.toList());
+    }
 //    public Set<Job> fromJob(Set<JobSmallDto> dtoSet) {
 //
 //        return new User(dto.getRoles(), dto.getJobs(), dto.getDept(), dto.getUsername(),

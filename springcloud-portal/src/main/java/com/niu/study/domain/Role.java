@@ -25,6 +25,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -33,10 +34,7 @@ import java.util.Set;
 @Entity
 @Table(name = "sys_role")
 public class Role extends BaseEntity implements Serializable {
-
-    @JSONField(serialize = false)
     @ManyToMany(mappedBy = "roles")
-    @ApiModelProperty(value = "用户", hidden = true)
     private Set<User> users;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -59,5 +57,14 @@ public class Role extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "描述")
     private String description;
 
-
+    public Role(String ip, String createBy, String updateBy, Date createTime, Date updateTime, Set<User> users, Set<Menu> menus, Set<Dept> depts, String name, String dataScope, Integer level, String description) {
+        super(ip, createBy, updateBy, createTime, updateTime);
+        this.users = users;
+        this.menus = menus;
+        this.depts = depts;
+        this.name = name;
+        this.dataScope = dataScope;
+        this.level = level;
+        this.description = description;
+    }
 }

@@ -13,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -22,14 +23,13 @@ import java.util.Set;
 @Table(name="sys_user")
 public class User extends BaseEntity implements Serializable {
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @ApiModelProperty(value = "用户角色")
-    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<Role> roles=new LinkedHashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Job> jobs;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<Job> jobs=new LinkedHashSet<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "dept_id")
     @ApiModelProperty(value = "用户部门")
     private Dept dept;

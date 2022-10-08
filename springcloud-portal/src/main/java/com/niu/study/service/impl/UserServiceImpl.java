@@ -10,6 +10,7 @@ import com.niu.study.repository.UserRepository;
 import com.niu.study.service.UserService;
 import com.niu.study.application.dto.UserDto;
 import com.niu.study.utils.JWTTokenUtil;
+import com.niu.study.utils.enums.JsonResult;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,17 +31,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(UserDto dto) {
-        User user=new UserAssembler(beansFactoryService).fromUser(dto);
+        User user=new UserAssembler(beansFactoryService).formUser(dto);
         userRepository.createUserByUsernameAndPwd(user);
     }
 
     @Override
-    public UserDto queryUser(String accessToken) {
+    public JsonResult queryUser(String accessToken) {
         if (StringUtils.isBlank(accessToken)) throw new CustomizeException("令牌为空!");
         AccessToken token=tokenRepository.findByTokenId(accessToken);
         Map<String, Object> map = JWTTokenUtil.verifyTokenAndGetClaims(token.getAccessToken());
         User user = userRepository.findUsername(map.get("username").toString());
-        return new UserAssembler(beansFactoryService).toUser(user);
+        UserDto userDto = new UserAssembler(beansFactoryService).toUser(user);
+        return new JsonResult(userDto);
     }
 
 
